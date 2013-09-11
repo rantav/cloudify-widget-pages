@@ -16,7 +16,8 @@
 import static Shell.*
 
 service {
-    name = serviceName
+    name "generic"
+    numInstances 1
 
     compute {
         template computeTemplate
@@ -25,21 +26,11 @@ service {
     lifecycle {
         init initScript
         install installScript
-        start {
-            if (useSudo)
-                sudo(startScript, [env: env?: [:])
-            else 
-                sh([env: env?: [:], startScript)
-            return null
-        }
+        start startScript
 
         locator {
             //avoid monitoring started processes by cloudify
             return [] as LinkedList
         }
     }
-
-    customCommands([
-
-    ])
 }
