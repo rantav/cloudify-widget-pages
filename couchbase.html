@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Couchbase | Cloudify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://ricostacruz.com/nprogress/nprogress.css">
+    <style type="text/css">
+      body {
+        background: #fff;
+        color: #666;
+      }
+      h3 {
+        color: #be2228;
+      }
+      .logo {
+        background-image: url(img/couchbase.png);
+        width: 172px;
+        height: 72px
+      }
+      .panel-heading a {
+        padding-left: 10px;
+      }
+      .jumbotron {
+        background-color: #efd;
+      }
+      .jumbotron p {
+      }
+      #launch {
+        width: 153px;
+        text-align: left;
+      }
+
+      #nprogress .bar {
+        background: #ddd;
+      }
+      #nprogress .peg {
+        box-shadow: 0 0 10px #fff, 0 0 5px #fff;
+      }
+      #nprogress .spinner-icon {
+        border-top-color:  #ddd;
+        border-left-color: #ddd;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-sm-offset-3 col-xs-offset-4 col-xs-8 col-sm-6 col-md-6">
+          <div class="header">
+            <div class='logo pull-right'></div>
+            <h3>Couchbase</h3>
+            <p>The NoSQL document database</p>
+          </div>
+          <div class="jumbotron">
+            <h2>Launch Couchbase using Cloudify</h2>
+            <p class="lead">Thanks to a flexible JSON model, Couchbase Server makes it easy to modify your applications without the constraints of a fixed database schema. Submillisecond, high-throughput reads and writes give you consistent high performance. Couchbase Server is easy to scale out, and supports topology changes with no downtime.</p>
+            <p>
+              <a class="btn btn-lg btn-success" id='launch' href="javascript:void(0)" data-launched="false">
+                <span class="glyphicon glyphicon-play"></span>
+                Launch Now
+              </a>
+            </p>
+          </div>
+          <div class="panel panel-default" style="display:none">
+            <div class="panel-heading">
+              <a href="#" id='manage' class='btn btn-lg btn-primary disabled' target='manage'>&raquo; Manage your app</a>
+              <a href="#" id='use' class='btn btn-lg btn-primary disabled' target='use'>&raquo; Use Couchbase</a>
+              <div class='pull-right'>
+                <p>
+                  Left: <strong id='time-left'>...</strong> minutes.
+                </p>
+              </div>
+            </div>
+            <div class="panel-body">
+              <pre id='log'>
+                <!-- Log goes here -->
+              </pre>
+            </div>
+            <div class="panel-footer">Powered by: HP Cloud, Cloudify (Patent Pending)</div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+    <div id='hidden-iframe' style="display:none">&nbsp;</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.postmessage/0.5/jquery.ba-postmessage.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="http://ricostacruz.com/nprogress/nprogress.js"></script>
+    <script type="text/javascript">
+      var WIDGET_ID = '4d642b90-ee10-45aa-b02a-175daf49a32d';
+    </script>
+    <script type="text/javascript" src='scripts/script.js'></script>
+  </body>
+</html>
