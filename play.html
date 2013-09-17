@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Play Framework | Cloudify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://ricostacruz.com/nprogress/nprogress.css">
+    <style type="text/css">
+      body {
+        background: #92d13d;
+      }
+      .header {
+        color: #fff;
+      }
+
+      .panel-heading a {
+        padding-left: 10px;
+      }
+      .jumbotron {
+      }
+      .jumbotron p {
+      }
+      #launch {
+        width: 153px;
+        text-align: left;
+      }
+
+      #nprogress .bar {
+        background: #ddd;
+      }
+      #nprogress .peg {
+        box-shadow: 0 0 10px #fff, 0 0 5px #fff;
+      }
+      #nprogress .spinner-icon {
+        border-top-color:  #ddd;
+        border-left-color: #ddd;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-sm-offset-3 col-xs-offset-4 col-xs-8 col-sm-6 col-md-6">
+          <div class="header">
+            <h3>Play Framework</h3>
+            <p class='lead'>The High Velocity Web Framework For Java and Scala</p>
+          </div>
+          <div class="jumbotron">
+            <h2>Launch Play using Cloudify</h2>
+            <p class="lead">Play Framework makes it easy to build web applications with Java & Scala.</p>
+            <p>Play is based on a lightweight, stateless, web-friendly architecture.</p>
+            <p>Built on Akka, Play provides predictable and minimal resource consumption (CPU, memory, threads) for highly-scalable applications.</p>
+            <p>
+              <a class="btn btn-lg btn-success" id='launch' href="javascript:void(0)" data-launched="false">
+                <span class="glyphicon glyphicon-play"></span>
+                Launch Now
+              </a>
+            </p>
+          </div>
+          <div class="panel panel-default" style="display:none">
+            <div class="panel-heading">
+              <a href="#" id='manage' class='btn btn-lg btn-primary disabled' target='manage'>&raquo; Manage your app</a>
+              <a href="#" id='use' class='btn btn-lg btn-primary disabled' target='use'>&raquo; Use Play!</a>
+              <div class='pull-right'>
+                <p>
+                  Left: <strong id='time-left'>...</strong> minutes.
+                </p>
+              </div>
+            </div>
+            <div class="panel-body">
+              <pre id='log'>
+                <!-- Log goes here -->
+              </pre>
+            </div>
+            <div class="panel-footer">Powered by: HP Cloud, Cloudify (Patent Pending)</div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+    <div id='hidden-iframe' style="display:none">&nbsp;</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.postmessage/0.5/jquery.ba-postmessage.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="http://ricostacruz.com/nprogress/nprogress.js"></script>
+    <script type="text/javascript">
+      var WIDGET_ID = '670fbb45-6f05-4497-a0bd-e67925a49e6f';
+    </script>
+    <script type="text/javascript" src='scripts/script.js'></script>
+  </body>
+</html>
