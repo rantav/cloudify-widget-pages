@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>vert.x | Cloudify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://ricostacruz.com/nprogress/nprogress.css">
+    <style type="text/css">
+      body {
+        background: #111;
+      }
+      .header {
+        color: #fff;
+      }
+
+      .panel-heading a {
+        padding-left: 10px;
+      }
+      .jumbotron {
+        background-color: #fff;
+      }
+      .jumbotron p {
+        color: #33a098;
+      }
+      #launch {
+        width: 153px;
+        text-align: left;
+      }
+
+      #nprogress .bar {
+        background: #ddd;
+      }
+      #nprogress .peg {
+        box-shadow: 0 0 10px #fff, 0 0 5px #fff;
+      }
+      #nprogress .spinner-icon {
+        border-top-color:  #ddd;
+        border-left-color: #ddd;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-sm-offset-3 col-xs-offset-4 col-xs-8 col-sm-6 col-md-6">
+          <div class="header">
+            <h3>Vert.x</h3>
+          </div>
+          <div class="jumbotron">
+            <h2>Launch Vert.x using Cloudify</h2>
+            <p class="lead">Vert.x is a lightweight, high performance application platform for the JVM that's designed for modern mobile, web, and enterprise applications.</p>
+            <p>
+              <a class="btn btn-lg btn-success" id='launch' href="javascript:void(0)" data-launched="false">
+                <span class="glyphicon glyphicon-play"></span>
+                Launch Now
+              </a>
+            </p>
+          </div>
+          <div class="panel panel-default" style="display:none">
+            <div class="panel-heading">
+              <a href="#" id='manage' class='btn btn-lg btn-primary disabled' target='manage'>&raquo; Manage your app</a>
+              <a href="#" id='use' class='btn btn-lg btn-primary disabled' target='use'>&raquo; Use Vert.x</a>
+              <div class='pull-right'>
+                <p>
+                  Left: <strong id='time-left'>...</strong> minutes.
+                </p>
+              </div>
+            </div>
+            <div class="panel-body">
+              <pre id='log'>
+                <!-- Log goes here -->
+              </pre>
+            </div>
+            <div class="panel-footer">Powered by: HP Cloud, Cloudify (Patent Pending)</div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.postmessage/0.5/jquery.ba-postmessage.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="http://ricostacruz.com/nprogress/nprogress.js"></script>
+    <script type="text/javascript">
+var postUrl = null;
+function start() {
+  NProgress.start();
+  var iframe = $("#iframe");
+  var postObj = {name: 'play_widget'};
+  $.postMessage(JSON.stringify(postObj), postUrl, iframe.get(0).contentWindow);
+}
+function stop() {
+  var iframe = $("#iframe");
+  $.postMessage(JSON.stringify({name: 'stop_widget'}), postUrl, iframe.get(0).contentWindow);
+  updateManageUrl();
+  updateUseUrl();
+}
+function updateButtonState(state) {
+  if (state == 'RUNNING') {
+    $('#launch').data('launched', true).
+        html("<span class='glyphicon glyphicon-stop'></span> Stop");
+    $('.panel').show(200);
+  } else if (state == 'STOPPED') {
+    NProgress.done();
+    $('#launch').data('launched', false).
+        html("<span class='glyphicon glyphicon-play'></span> Launch Now");
+  }
+}
+
+function updateLog(logLines) {
+  $('#log').html(logLines.join('\n'));
+}
+function appendLog(line) {
+  $('#log').append(('\n') + line);
+}
+
+function updateUseUrl(url, title) {
+  var $use = $('#use');
+  updateActionButton($('#use'), url);
+}
+function updateManageUrl(url) {
+  updateActionButton($('#manage'), url);
+}
+function updateActionButton($elm, url) {
+  $elm.attr('href', url);
+  if (url) {
+    $elm.removeClass('disabled');
+  } else {
+    $elm.addClass('disabled');
+  }
+}
+function updateTimeLeft(minutes) {
+  $('#time-left').html(minutes);
+}
+
+$(function() {
+  var src = 'http://launch.cloudifysource.org/widget/widget?' +
+    'apiKey=3e19d498-2da6-4431-a7f4-85ac7cef1a7d' +
+    '&title=Launch' +
+    '&origin_page_url=' + document.location.href;
+  postUrl = src;
+  var html = '<iframe id="iframe" src="' + src + '" width="600" height="463"></iframe>';
+  $('#hidden-iframe').html(html);
+
+  $('#launch').click(function() {
+    if ($('#launch').data('launched')) {
+      stop();
+    } else {
+      start();
+    }
+  });
+
+  $.receiveMessage(function(e) {
+    try {
+      var msg = JSON.parse(e.data);
+      var $log = $("#log");
+
+      if (msg.name == 'write_log') {
+        $log.append($("<li/>", {html: msg.html}).addClass(msg.className));
+        $log.scrollTop($log[0].scrollHeight);
+      } else if (msg.name == "widget_status") {
+        updateButtonState(msg.status.state);
+
+        console.log(msg.status);
+        updateTimeLeft(msg.status.timeleft);
+        updateManageUrl('http://' + msg.status.publicIp + ':8099/');
+        if (msg.status.consoleLink) {
+          updateUseUrl(msg.status.consoleLink.url, msg.status.consoleLink.title);
+          NProgress.done();
+        } else {
+          updateUseUrl();
+        }
+
+        updateLog(msg.status.output);
+      } else if (msg.name == "stop_widget") {
+        updateButtonState('STOPPED');
+        appendLog('STOPPED');
+        updateUseUrl();
+        updateManageUrl();
+      }
+    } catch (exception) {
+      console.log(["problem receiving message... ", e, exception]);
+    }
+  }, function(origin) {
+    return true;
+  });
+});
+    </script>
+    <div id='hidden-iframe' style="display:none">&nbsp;</div>
+  </body>
+</html>
