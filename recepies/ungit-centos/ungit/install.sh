@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo yum install -y rethinkdb
+sudo npm install -g ungit
