@@ -5,4 +5,4 @@ source $DIT/build.sh
 source $DIT/git.sh
 source $DIR/npm.sh
 
-sudo npm install -g tty.js
+#sudo npm install -g tty.js
