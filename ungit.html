@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>ungit | Cloudify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://ricostacruz.com/nprogress/nprogress.css">
+    <style type="text/css">
+      body {
+        background: #252833;
+        color: #d8d8d8
+      }
+      .header {
+        color: #fff;
+        background-color: #2B3844;
+        padding: 0 20px 0 20px;
+        border-radius: 6px;
+      }
+      ul li {
+        font-size: small;
+      }
+      .panel-heading a {
+        padding-left: 10px;
+      }
+      .jumbotron {
+        background-color: #643A44;
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .jumbotron p {
+      }
+      #launch {
+        width: 153px;
+        text-align: left;
+      }
+
+      #nprogress .bar {
+        background: #ddd;
+      }
+      #nprogress .peg {
+        box-shadow: 0 0 10px #fff, 0 0 5px #fff;
+      }
+      #nprogress .spinner-icon {
+        border-top-color:  #ddd;
+        border-left-color: #ddd;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-sm-offset-3 col-xs-offset-4 col-xs-8 col-sm-6 col-md-6">
+          <div class="header">
+            <h3>ungit</h3>
+            <p class='lead'>The easiest way to use git. On any platform. Anywhere.</p>
+          </div>
+          <div class="jumbotron">
+            <h2>ungit</h2>
+            <ul>
+              <li>Clean and intuitive UI that makes it easy to understand git.</li>
+              <li>Runs on any platform that node.js & git supports.</li>
+              <li>Web-based, meaning you can run it on your cloud/pure shell machine and use the ui from your browser (just browse to http://your-cloud-machine.com:8448).</li>
+              <li>Works well with GitHub.</li>
+              <li>Gerrit integration (view, checkout and push changes from/to gerrit).</li>
+            </ul>
+            <hr/>
+            <h3>Launch ungit using Cloudify</h3>
+            <p>
+              <a class="btn btn-lg btn-success" id='launch' href="javascript:void(0)" data-launched="false">
+                <span class="glyphicon glyphicon-play"></span>
+                Launch Now
+              </a>
+            </p>
+          </div>
+          <div class="panel panel-default" style="display:none">
+            <div class="panel-heading">
+              <a href="#" id='manage' class='btn btn-lg btn-primary disabled' target='manage'>&raquo; Manage your app</a>
+              <a href="#" id='use' class='btn btn-lg btn-primary disabled' target='use'>&raquo; Use ungit</a>
+              <div class='pull-right'>
+                <p>
+                  Left: <strong id='time-left'>...</strong> minutes.
+                </p>
+              </div>
+            </div>
+            <div class="panel-body">
+              <pre id='log'>
+                <!-- Log goes here -->
+              </pre>
+            </div>
+            <div class="panel-footer">Powered by: HP Cloud, Cloudify (Patent Pending)</div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+    <div id='hidden-iframe' style="display:none">&nbsp;</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.postmessage/0.5/jquery.ba-postmessage.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="http://ricostacruz.com/nprogress/nprogress.js"></script>
+    <script type="text/javascript">
+      var WIDGET_ID = '0ac1e2cf-5f56-4a28-8382-5c81c3fa884a';
+    </script>
+    <script type="text/javascript" src='scripts/script.js'></script>
+  </body>
+</html>
