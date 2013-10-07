@@ -1,8 +1,9 @@
 #!/bin/bash
-set -x
+set -x -e
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $DIT/build.sh
-source $DIT/git.sh
+source $DIR/build.sh
+source $DIR/git.sh
 source $DIR/npm.sh
 
 #sudo npm install -g tty.js

@@ -1,3 +1,3 @@
 #!/bin/bash
-set -x
+set -x -e
 sudo npm install -g ungit

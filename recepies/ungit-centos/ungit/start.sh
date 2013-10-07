@@ -1,5 +1,6 @@
 #!/bin/bash
-set -x
+set -x -e
+
 cd /tmp
 rm -rf ungit
 git clone git://github.com/FredrikNoren/ungit.git

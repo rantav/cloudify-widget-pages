@@ -1,3 +1,3 @@
 #!/bin/bash
-set -x
+set -x -e
 sudo yum install -y make gcc gcc-c++
