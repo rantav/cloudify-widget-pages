@@ -7,6 +7,7 @@ git clone git://github.com/FredrikNoren/ungit.git
 
 
 nohup ungit --port=8081 &
+ls ~/.tty.js || mkdir ~/.tty.js
 echo "{\"cwd\":\"/tmp/ungit\"}" > ~/.tty.js/config.json
 tty.js --port 8080 --deamonize &
 
