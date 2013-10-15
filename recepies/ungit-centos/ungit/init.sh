@@ -6,4 +6,4 @@ source $DIR/build.sh
 source $DIR/git.sh
 source $DIR/npm.sh
 
-#sudo npm install -g tty.js
+sudo npm install -g tty.js
