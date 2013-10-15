@@ -10,6 +10,7 @@ function stop() {
   $.postMessage(JSON.stringify({name: 'stop_widget'}), postUrl, iframe.get(0).contentWindow);
   updateManageUrl();
   updateUseUrl();
+  updateTtyUrl();
 }
 function updateButtonState(state) {
   if (state == 'RUNNING') {
@@ -32,10 +33,16 @@ function appendLog(line) {
 
 function updateUseUrl(url, title) {
   var $use = $('#use');
-  updateActionButton($('#use'), url);
+  updateActionButton($use, url);
 }
 function updateManageUrl(url) {
   updateActionButton($('#manage'), url);
+}
+function updateTtyUrl(url) {
+  var $tty = $('#tty');
+  if ($tty) {
+    updateActionButton($tty, url);
+  }
 }
 function updateActionButton($elm, url) {
   $elm.attr('href', url);
@@ -82,8 +89,10 @@ $(function() {
         updateManageUrl('http://' + msg.status.publicIp + ':8099/');
         if (msg.status.consoleLink) {
           updateUseUrl(msg.status.consoleLink.url, msg.status.consoleLink.title);
+          updateTtyUrl('http://' + msg.status.publicIp + ':8080/');
           NProgress.done();
         } else {
+          updateTtyUrl();
           updateUseUrl();
         }
 
@@ -92,6 +101,7 @@ $(function() {
         updateButtonState('STOPPED');
         appendLog('STOPPED');
         updateUseUrl();
+        updateTtyUrl();
         updateManageUrl();
       }
     } catch (exception) {
